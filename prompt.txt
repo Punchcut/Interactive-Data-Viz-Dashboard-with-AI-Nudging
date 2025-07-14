@@ -1,0 +1,26 @@
+Using data from this csv I gave you, make me an html page with javascript in script tags that uses apache e-charts that does a few things   
+1.  Provide 4 graphical visualizations in the form of a line chart, a bar chart, a scatter plot, and a horizontal bar chart. 
+2. Give me a button towards the top where I can upload a csv to swap out the data for all charts. Make sure instead of naively swapping out all the data it pulls the names and logic from the new input csv as well
+3. Provides a small amount of reasoning alongside all charts. 2 sentences of specifically what this chart is representing in its data. Be specific to the contents of the dataset, try to find a takeway or trend
+4.  Prompts Me to rate the charts a check or an X for if I would like to use them or not.
+5. Prompts me to further to nudge checked charts towards a specific result either in the chart representation. To do this, when I nudge a specific chart, it prompts the gemini api again to edit the json to reflect the nudge. The api key should be set up to be injected by the environment
+6. Make a global dark mode vs light mode for all items for maximum readability. Including headers for the graphs, make all text light on dark mode, and dark on light mode
+7. Ensure that the legends, toolbar, ticks, and axis labels are present and not overlapping
+Additionally: 
+1. ALL nudges should use additional gemini api calls from within your app with the environment injecting an API key 
+1.5 make each chart have an svg download independant of one another.
+2. The charts should always have different colors for different categories and have a toolbar. The toolbar should be below the graph 
+3. The charts should always have a responsive legend. 
+4. All different charts should be meaningfully different, either in where the axes are placed, or how the graphics are representing that data
+5. Axis that are categorical should always be type:category, and have a list of the elements so that no elements are skipped in the ticks. 
+6. Make sure to always use the imports 
+7. <script src="https://cdn.tailwindcss.com"></script>
+ <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+1. When appropriate: Set xAxis.type: 'category'
+* Populate xAxis.data by extracting string values in their original order from your input data.
+* Use xAxis.axisLabel: { interval: 0, rotate: 30, color: "#fff", hideOverlap: false }.
+* Set xAxis.axisTick: { show: true, alignWithLabel: true }.
+* Adjust grid.bottom (e.g., to "15%") and ensure grid.containLabel: true to make space for rotated labels.
+* Use this font <link href="https://db.onlinewebfonts.com/c/cfaed5248d8a448c74739987e53ff41f?family=Breuer+Text+Regular" rel="stylesheet">
+
+
