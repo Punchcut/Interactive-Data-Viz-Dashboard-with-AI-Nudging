@@ -4,12 +4,12 @@ This is a dynamic, single-page web application for visualizing CSV data using Ap
 
 ## **Table of Contents**
 
-* [App Setup](https://www.google.com/search?q=%23app-setup)  
-* [Important Note on Generation](https://www.google.com/search?q=%23important-note-on-generation)  
-* [How to Use](https://www.google.com/search?q=%23how-to-use)  
-  * [Initial View](https://www.google.com/search?q=%231-initial-view)  
-  * [Uploading Your Own Data](https://www.google.com/search?q=%232-uploading-your-own-data)  
-  * [Interacting with the Charts](https://www.google.com/search?q=%233-interacting-with-the-charts)
+* [App Setup](#app-setup)  
+* [Important Note on Generation](#important-note-on-generation)  
+* [How to Use](#how-to-use)  
+  * [Initial View](#1-initial-view)  
+  * [Uploading Your Own Data](#2-uploading-your-own-data)  
+  * [Interacting with the Charts](#3-interacting-with-the-charts)
 
 ## **App Setup**
 
