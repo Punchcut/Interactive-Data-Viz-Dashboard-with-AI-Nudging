@@ -33,8 +33,7 @@ The Chart Rendering Module uses the new analysis results to completely redraw an
 
 AI-Generated Insights: For each chart, after it is rendered, generate and display a concise, two-sentence analysis describing what the chart represents and highlighting a key trend or data point.
 Interactive Feedback Loop:
-Implement an approval (✓) and rejection (X) UI element for each chart.
-Clicking "Approve" (✓) reveals a text input field and a "Nudge" button.
+Below the chart there is a "Nudge" button.
 The "Nudge" button must open a text prompt for the user to submit a natural language prompt to gemini using the gemini api
 once a nudge has been submitted the chart grays out and the chart shows a "nudging" overlay while waiting for the response from gemini. Gemini's job is to return valid json that will be used to replace the current chart
 Advanced Gemini API Integration (`callGeminiToNudgeChart`)
