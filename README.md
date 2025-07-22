@@ -17,12 +17,13 @@ To generate the visualization dashboard, please follow these steps:
 
 1. **Download Files**: From the repository, download the `prompt.txt` file and an example `.csv` file from the /data directory.  
 2. **Upload to Gemini**: In a new session, upload both the `prompt.txt` and the `.csv` file.  
-3. **Provide the Prompt**: Use the following exact prompt: Compile the instructions from prompt.txt.  
-4. **Generate the App**: Please allow a few minutes for the application to be fully generated.
+3. **Provide the Prompt**: Use the following exact prompt: `Compile the instructions from prompt.txt`
+4. **Click the Canvas Buton**: Below the gemini input dialog box, located near features like "Deep Research"  
+5. **Generate the App**: Please allow a few minutes for the application to be fully generated.
 
 ## **Important Note on Generation**
 
-**A Note on AI Generation:** Due to the nature of generative AI, there can be slight variances in the output. If you find that an internal function of the generated application is not working as expected (e.g., uploading a new CSV, nudging a chart), please use the **"Fix errors"** button. This will often resolve any inconsistencies from the generation process.
+**A Note on AI Generation:** Due to the nature of generative AI, there can be variances in the output app. If you find that an internal function of the generated application is not working as expected (e.g., uploading a new CSV, nudging a chart), please use the **"Fix errors"** button. This will often resolve any inconsistencies from the generation process.
 
 ## **How to Use**
 
