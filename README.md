@@ -44,11 +44,7 @@ When you first use the generated tool, it will load with a default placeholder d
 For each of the four charts, you have several interaction options:
 
 * **Toggle Theme**: Use the **"Toggle Theme"** button in the header to switch the entire page and all charts between light and dark modes.  
-* **Rate a Chart**:  
-  * Click the **✅** button to approve a chart. This indicates you find it useful and enables the "Nudge" and "Download" options.  
-  * Click the **❌** button to mark a chart as not useful.  
 * **Nudge a Chart with AI**:  
-  1. First, approve a chart by clicking **✅**. The **"Nudge Chart"** button will appear.  
   2. Click **"Nudge Chart"** to open a modal window.  
   3. In the text box, type a command in plain English. For example:  
      * `"Change the chart type to a pie chart."` 
@@ -56,6 +52,5 @@ For each of the four charts, you have several interaction options:
      * `"Use a red color for the 'Value1' series."`  
   4. Click **"Submit Nudge"**. The application will send the current chart settings and your request to the Gemini API and update the chart with the AI-generated modifications.  
 * **Download a Chart**:  
-  1. First, approve a chart by clicking **✅**. The **"Download SVG"** button will appear.  
   2. Click **"Download SVG"** to save a high-quality vector version of the chart.  
   3. You can also use the built-in ECharts toolbar (at the bottom of each chart) to **save** the **chart as a PNG image**.
