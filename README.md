@@ -1,4 +1,4 @@
-# **Interactive ECharts Dashboard with AI Nudging**
+# **Interactive Data Viz Dashboard with AI Nudging**
 
 This is a dynamic, single-page web application for visualizing CSV data using Apache ECharts. It allows users to upload their own data, view it in multiple chart formats, and leverage a Gemini-based AI to interactively modify or "nudge" the visualizations.
 
