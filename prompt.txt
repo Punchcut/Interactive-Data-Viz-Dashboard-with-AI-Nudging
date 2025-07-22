@@ -1,26 +1,58 @@
-Using data from this csv I gave you, make me an html page with javascript in script tags that uses apache e-charts that does a few things   
-1.  Provide 4 graphical visualizations in the form of a line chart, a bar chart, a scatter plot, and a horizontal bar chart. 
-2. Give me a button towards the top where I can upload a csv to swap out the data for all charts. Make sure instead of naively swapping out all the data it pulls the names and logic from the new input csv as well
-3. Provides a small amount of reasoning alongside all charts. 2 sentences of specifically what this chart is representing in its data. Be specific to the contents of the dataset, try to find a takeway or trend
-4.  Prompts Me to rate the charts a check or an X for if I would like to use them or not.
-5. Prompts me to further to nudge checked charts towards a specific result either in the chart representation. To do this, when I nudge a specific chart, it prompts the gemini api again to edit the json to reflect the nudge. The api key should be set up to be injected by the environment
-6. Make a global dark mode vs light mode for all items for maximum readability. Including headers for the graphs, make all text light on dark mode, and dark on light mode
-7. Ensure that the legends, toolbar, ticks, and axis labels are present and not overlapping
-Additionally: 
-1. ALL nudges should use additional gemini api calls from within your app with the environment injecting an API key 
-1.5 make each chart have an svg download independant of one another.
-2. The charts should always have different colors for different categories and have a toolbar. The toolbar should be below the graph 
-3. The charts should always have a responsive legend. 
-4. All different charts should be meaningfully different, either in where the axes are placed, or how the graphics are representing that data
-5. Axis that are categorical should always be type:category, and have a list of the elements so that no elements are skipped in the ticks. 
-6. Make sure to always use the imports 
-7. <script src="https://cdn.tailwindcss.com"></script>
- <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-1. When appropriate: Set xAxis.type: 'category'
-* Populate xAxis.data by extracting string values in their original order from your input data.
-* Use xAxis.axisLabel: { interval: 0, rotate: 30, color: "#fff", hideOverlap: false }.
-* Set xAxis.axisTick: { show: true, alignWithLabel: true }.
-* Adjust grid.bottom (e.g., to "15%") and ensure grid.containLabel: true to make space for rotated labels.
-* Use this font <link href="https://db.onlinewebfonts.com/c/cfaed5248d8a448c74739987e53ff41f?family=Breuer+Text+Regular" rel="stylesheet">
+Objective:
+Generate a single, self-contained HTML file that functions as a fully client-side, dynamic data visualization dashboard. The application must use Apache E-Charts to render multiple, distinct chart types from user-uploaded CSV or TSV data. It will feature a sophisticated user interface, including a theme toggle and an AI-powered "nudge" feature for interactive chart modification.
 
+The core principle of this application is client-side intelligence. All data parsing, structural analysis, and chart generation logic must be encapsulated within the JavaScript of the HTML file, allowing it to adapt to new data in real-time without requiring regeneration.
+
+The application's logic must be written with the assumption that the API key is present and has been injected by the Google Canvas environment
+
+Core Functional Requirements
+
+1. Client-Side Data Analysis Engine
+Create a reusable JavaScript module within the main script that is responsible for all data processing. This engine will be invoked both on initial load (with sample data) and whenever a new file is uploaded.
+
+Data Parsing Function: Implement a robust function that accepts raw text from a CSV or TSV file. It must automatically detect the delimiter (comma or tab) and parse the text into a clean array of JavaScript objects.
+Intelligent Structure Analyzer: After parsing, this function must analyze the data's structure to make informed visualization decisions.
+Data-Type Identification: Scan each column to heuristically determine its data type (e.g., Categorical, Numerical, or Temporal/Date).
+Axis & Series Determination: Based on the identified data types, intelligently select a primary axis and the data series. The default axis should be the first categorical or temporal column found. All numerical columns should be designated as potential data series.
+The function must output a structured summary of its findings (e.g., an object detailing the chosen axis, series columns, and data types) to be used by other functions.
+
+2. Dynamic Chart Rendering Module
+This JavaScript module will use the output from the Data Analysis Engine to visualize the data.
+
+Guaranteed Visualization Logic: Your top priority is to avoid blank charts. This module must always render a valid visualization. If the data structure analysis is ambiguous, it must default to a standard bar chart as a reliable fallback.
+Initial Multi-Chart Display: Upon successful analysis, render the data across four distinct E-Charts instances: a line chart, a bar chart, a scatter plot, and a horizontal bar chart.
+Meaningful Differentiation: Each of the four charts must represent the data differently, using the analysis results to configure different axes or data combinations to provide varied perspectives.
+
+3. Interactive "Upload Data" Workflow
+Incorporate a prominent "Upload CSV/TSV" button. When a user selects a new file, the client-side script must repeat the entire analysis and rendering process:
+The Data Analysis Engine is triggered.
+The new data is parsed and its structure is analyzed.
+The Chart Rendering Module uses the new analysis results to completely redraw and update all four chart visualizations, seamlessly adapting the dashboard to the new dataset.
+
+4. AI-Powered Chart Nudging & Insights
+
+AI-Generated Insights: For each chart, after it is rendered, generate and display a concise, two-sentence analysis describing what the chart represents and highlighting a key trend or data point.
+Interactive Feedback Loop:
+Implement an approval (✓) and rejection (X) UI element for each chart.
+Clicking "Approve" (✓) reveals a text input field and a "Nudge" button.
+The "Nudge" button must open a text prompt for the user to submit a natural language prompt to gemini using the gemini api
+once a nudge has been submitted the chart grays out and the chart shows a "nudging" overlay while waiting for the response from gemini. Gemini's job is to return valid json that will be used to replace the current chart
+Advanced Gemini API Integration (`callGeminiToNudgeChart`)
+This asynchronous JavaScript function will power the "Nudge" feature. It must accept the target chart's ID and the user's text request.
+Context-Rich Prompt Construction: The function must dynamically construct a detailed prompt for the Gemini API model, instructing it to act as an "expert ECharts configuration assistant". This prompt is critical and must include three key pieces of information:
+The User's Plain-Text Request.
+The Client-Side Data Analysis Results for the current dataset to provide data context.
+The Current E-Charts JSON Configuration for the specific chart being nudged.
+Strict Output Instructions: The prompt must explicitly command the model: "Output ONLY the modified and valid ECharts JSON configuration object. Do NOT add any explanations, surrounding text, or markdown backticks (```)."
+API Call and Dynamic Update: The function will make a `fetch` POST request to the `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent` endpoint. It will use the API key provided directly by the Google Canvas environment, per the critical security requirement. On a successful response, it must parse the new JSON and update the chart using `.setOption(newOptions, true)`, ensuring a clean replacement of the old configuration.
+Robust Error Handling: Wrap the API call in `try...catch`. Implement a loading overlay on the specific chart being nudged. On error, hide the overlay, re-enable the button, and alert a user-friendly error message.
+
+Technical & UI/UX Specifications
+
+Self-Contained: The final output must be a single `.html` file using `<script>` tags for ECharts.
+Typography: Use the 'Inter' font from Google Fonts.
+Theming: Include a global light/dark mode toggle that properly themes all UI elements, including chart backgrounds, chart text, and the entire app's colors. ensure that all text is readable and while in dark mode, no text is dark 
+Chart Details:
+Toolbox: Equip each chart with a toolbox that includes a feature to download the chart as an SVG image.
+Aesthetics: Use a distinct and pleasant color palette for data series. Ensure legends and axis labels are always legible and not overlapping. On categorical axes, labels must be automatically rotated to prevent collision or truncation.
 
